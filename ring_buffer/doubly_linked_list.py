@@ -80,6 +80,13 @@ class DoublyLinkedList:
 
         return total
 
+
+    def print_nodes(self):
+        node = self.head
+        while node is not None:
+            print(node.value)
+            node = node.next
+
     """Wraps the given value in a ListNode and inserts it 
     as the new head of the list. Don't forget to handle 
     the old head node's previous pointer accordingly."""
