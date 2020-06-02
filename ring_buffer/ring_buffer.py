@@ -8,9 +8,6 @@ class RingBuffer:
         self.size = 0
         self.oldest = None
 
-    def set_oldest(self, new_oldest):
-        self.oldest = new_oldest
-
     # add the given element to the buffer
     def append(self, item):
         # when buffer is less than capacity
@@ -18,13 +15,12 @@ class RingBuffer:
             # add to the tail
             self.storage.add_to_tail(item)
             # oldest item is always the head when buffer < capacity
-            self.set_oldest(self.storage.head)
+            self.oldest = self.storage.head
             # increment the size
             self.size += 1
 
         # when buffer reaches capacity
         elif self.size == self.capacity:
-
             # overwrite the oldest item with the new item
             self.oldest.value = item
 
@@ -32,9 +28,9 @@ class RingBuffer:
             # if there is no next item, we are at the tail
             # so we set the oldest item back to the head
             if self.oldest.next:
-                self.set_oldest(self.oldest.next)
+                self.oldest = self.oldest.next
             else:
-                self.set_oldest(self.storage.head)
+                self.oldest = self.storage.head
 
 
     def get(self):
